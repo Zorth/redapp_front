@@ -1,6 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const schemas = require('../models/schemas');
+const CharacterModel = require('../models/characterSchema');
+
+router.post('/', (req, res) => {
+    res.send('Backend Connection.');
+})
 
 router.post('/charup', (req, res) => {
     const {handle} = req.body;
@@ -10,8 +14,8 @@ router.post('/charup', (req, res) => {
 })
 
 router.get('/characters', (req, res) => {
-    const users = schemas.Chars;
-    const userData = users.find({}).exec();
+
+    const userData = CharacterModel.find({}).exec();
 
     if (userData) {
         res.send(JSON.stringify(userData));
