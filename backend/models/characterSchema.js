@@ -19,6 +19,7 @@ const charSchema = new mongoose.Schema({
     },
     skills: [],
     HP: Number,
+    wound: Number,
     HUM: Number,
     headArmor: {
         Name: String,

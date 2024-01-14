@@ -14,7 +14,9 @@ html {
 
 .HPBar-container {
     position: relative;
-    width: 100vw;
+    margin-top: 2vmin;
+    width: 100%;
+    height: 10vh;
 }
 
 .HPBar {
@@ -25,7 +27,7 @@ html {
     border-radius: 3vmin;
     height: 10vh;
     background: #373b44;
-    display:flex;
+    display: flex;
     justify-content: space-around;
     align-items: center;
     font-size: 5vh;
@@ -36,7 +38,7 @@ html {
     position: absolute;
     /*background-color: red;*/
     height: 10vh;
-    width:50vw;
+    width: 50vw;
 }
 
 .HPBar-Right {
@@ -45,7 +47,53 @@ html {
     position: absolute;
     /*background-color: green;*/
     height: 10vh;
-    width:50vw;
+    width: 50vw;
+}
+
+.woundState-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
+    margin: 2vmin;
+    border-radius: 3vmin;
+    min-height: 10vh;
+    width: 95vw;
+    background-color: #373b44;
+}
+
+.woundState-container.lightly {
+    background-color: #c7c55e;
+}
+
+.woundState-container.seriously {
+    background-color: #dc8643;
+}
+
+.woundState-container.mortally {
+    background-color: #ef2d1a;
+}
+
+.woundState-container h1 {
+    display: block;
+    font-size: 3vh;
+    font-weight: bold;
+    margin: 0;
+}
+
+.woundState-container h2 {
+    display: block;
+    font-size: 2vh;
+    margin: 0;
+    font-weight: normal;
+}
+
+.woundState-container h3 {
+    display: block;
+    font-size: 1.5vh;
+    margin: 0;
+    font-weight: normal;
+    font-style: italic;
 }
 
 /* app/page css */
