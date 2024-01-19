@@ -22,21 +22,32 @@ const charSchema = new mongoose.Schema({
     wound: Number,
     HUM: Number,
     headArmor: {
-        Name: String,
+        name: String,
         baseSP: Number,
         SP: Number
     },
     bodyArmor: {
-        Name: String,
+        name: String,
         baseSP: Number,
         SP: Number
     },
     equipment: [],
+    weapons: [{
+        name: String,
+        skill: String,
+        ammo: String,
+        dmg: String,
+        loaded: Number,
+        mag: Number,
+        ROF: Number,
+        conceal: Boolean,
+        autofire: Number,
+        explosive: Boolean
+    }],
     cyberware: [],
     ammo: {
-        current: Number,
-        chamberSize: Number,
-        total: Number
+        name: String,
+        count: Number
     },
     baseIP: Number,
     IP: Number,

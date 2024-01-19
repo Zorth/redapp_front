@@ -28,7 +28,7 @@ export function CharacterHub() {
     return (
         <div className="App">
             {characters ? characters.map((char) => {
-                return <div key={char._id} >
+                return <div key={char._id} style={{margin: "2vmin"}} >
                     <button key={char._id} className="button-49"><Link key={char._id} to={"/char/" + char._id}>{char.handle}</Link>
                     </button>
                 </div>

@@ -1,20 +1,42 @@
+:root {
+    --background-color: #03071e;
+    --primary-section: #6a040f;
+    --secondary-section: #370617;
+    --text-color: #e1dfdd;
+    --highlight: #9d0208;
+}
+
 /* char sheet */
 html {
-    background-color: #282c34;
+    background-color: var(--background-color);
     font-family: 'Roboto', sans-serif;
     font-size: calc(10px + 2vmin);
     text-align: center;
-    color: white;
+    color: var(--text-color);
     margin: auto;
 }
 
-.handle {
-    display: block;
+.char-base {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.Header {
+    height: 10vh;
+    background-color: var(--primary-section);
+    border-radius: 3vmin;
+    width: 95vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .HPBar-container {
     position: relative;
-    margin-top: 2vmin;
     width: 100%;
     height: 10vh;
 }
@@ -26,28 +48,28 @@ html {
     width: 95vw;
     border-radius: 3vmin;
     height: 10vh;
-    background: #373b44;
+    background: var(--primary-section);
     display: flex;
     justify-content: space-around;
     align-items: center;
     font-size: 5vh;
 }
 
-.HPBar-Left {
+.invisible-button-left {
     z-index: 100;
     position: absolute;
     /*background-color: red;*/
-    height: 10vh;
-    width: 50vw;
+    height: 100%;
+    width: 50%;
 }
 
-.HPBar-Right {
+.invisible-button-right {
     z-index: 100;
-    left: 50vw;
+    left: 50%;
     position: absolute;
     /*background-color: green;*/
-    height: 10vh;
-    width: 50vw;
+    height: 100%;
+    width: 50%;
 }
 
 .woundState-container {
@@ -55,11 +77,10 @@ html {
     align-items: center;
     flex-direction: column;
     justify-content: space-around;
-    margin: 2vmin;
     border-radius: 3vmin;
     min-height: 10vh;
     width: 95vw;
-    background-color: #373b44;
+    background-color: var(--primary-section);
 }
 
 .woundState-container.lightly {
@@ -74,21 +95,23 @@ html {
     background-color: #ef2d1a;
 }
 
-.woundState-container h1 {
+h1 {
     display: block;
     font-size: 3vh;
     font-weight: bold;
     margin: 0;
 }
 
-.woundState-container h2 {
+
+
+h3 {
     display: block;
     font-size: 2vh;
     margin: 0;
     font-weight: normal;
 }
 
-.woundState-container h3 {
+p {
     display: block;
     font-size: 1.5vh;
     margin: 0;
@@ -96,17 +119,97 @@ html {
     font-style: italic;
 }
 
+.weaponcarousel {
+    position: relative;
+    height: 25vh;
+    width: 95vw;
+    background-color: var(--secondary-section);
+    border-radius: 3vmin;
+}
+
+.weaponcarousel-header
+{
+    position: relative;
+    height: 50%;
+    background-color: var(--primary-section);
+    border-radius: inherit;
+}
+
+.weaponcarousel-ammo
+{
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.flex-horizontal {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    /*height: 100%;*/
+    width: 100%;
+}
+
+.flex-horizontal div {
+    margin: 1vmin;
+}
+
+.stat {
+    width: 14vh;
+    height: 15vh;
+    border-radius: 3vmin;
+    background-color: var(--primary-section);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0;
+}
+
+.stat hr {
+    border: 0.3vh solid var(--background-color);
+    margin:0;
+    width: 100%;
+}
+
+.armor-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 15vh;
+    width: 95vw;
+}
+
+.armor {
+    width: 46.25vw;
+    height: 15vh;
+    border-radius: 3vmin;
+    background-color: var(--primary-section);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0;
+}
+
+.armor hr {
+    border: 0.3vh solid var(--background-color);
+    margin:0;
+    width: 100%;
+}
+
 /* app/page css */
 .App {
     Width: 100%;
-    background-color: #282c34;
+    background-color: var(--background-color);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     font-size: calc(10px + 2vmin);
-    color: white;
+    color: var(--text-color);
     text-align: center;
 }
 
@@ -129,6 +232,32 @@ body {
     margin: 5vmin;
 }
 
+.modal, .overlay {
+    z-index: 999;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+}
+
+.overlay {
+    background: rgba(49,49,49,0.8);
+}
+
+.modal-content {
+    z-index: 1000;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    line-height: 1.4;
+    background: var(--primary-section);
+    padding: 14px 28px;
+    border-radius: 2vmin;
+}
 
 /* buttton by Steven Lei */
 .button-49,

@@ -37,12 +37,11 @@ router.post('/characters', async (req, res) => {
     }
 })
 
-// update a product
+// update a character
 router.put('/characters/:id', async (req, res) => {
     try {
         const {id} = req.params;
-        const character = await CharacterModel.findByIdAndUpdate(id, req.body);
-        // we cannot find any product in database
+        const character = await CharacterModel.findByIdAndUpdate(id, req.body, {upsert: true});
         if (!character) {
             return res.status(404).json({message: `cannot find any product with ID ${id}`})
         }
@@ -53,6 +52,20 @@ router.put('/characters/:id', async (req, res) => {
         res.status(500).json({message: error.message})
     }
 })
+
+// // update a weapon
+// router.patch('/w/:id', async (req, res) => {
+//     try {
+//         const {id} = req.params;
+//         const weapon = await CharacterModel.findOneAndUpdate(
+//             {'weapons._id': id},
+//             {$set: {'weapons.$': req.body}}, {new: true});
+//         res.status(200).json(weapon);
+//
+//     } catch (error) {
+//         res.status(500).json({message: error.message})
+//     }
+// })
 
 // router.delete('/products/:id', async(req, res) =>{
 //     try {
