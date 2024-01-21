@@ -1,18 +1,22 @@
 :root {
-    --background-color: #03071e;
-    --primary-section: #6a040f;
-    --secondary-section: #370617;
-    --text-color: #e1dfdd;
-    --highlight: #9d0208;
+
+    --text: #fbd6dd;
+    --background: #0e0105;
+    --primary: #FF013C;
+    /*--primary: #f27171;*/
+    --secondary: #00E6F6;
+    --accent: #F8F005;
+
+
 }
 
 /* char sheet */
 html {
-    background-color: var(--background-color);
+    background-color: var(--background);
     font-family: 'Roboto', sans-serif;
     font-size: calc(10px + 2vmin);
     text-align: center;
-    color: var(--text-color);
+    color: var(--text);
     margin: auto;
 }
 
@@ -27,12 +31,15 @@ html {
 
 .Header {
     height: 10vh;
-    background-color: var(--primary-section);
+    /*background-color: var(--primary);*/
     border-radius: 3vmin;
     width: 95vw;
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    background: linear-gradient(45deg, transparent 3%, var(--secondary) 3%, var(--secondary) 5%, var(--primary) 5%);
+    text-shadow: -3px -3px 0px var(--accent), 3px 3px 0px var(--secondary);
 }
 
 .HPBar-container {
@@ -48,11 +55,12 @@ html {
     width: 95vw;
     border-radius: 3vmin;
     height: 10vh;
-    background: var(--primary-section);
+    background: var(--primary);
     display: flex;
     justify-content: space-around;
     align-items: center;
     font-size: 5vh;
+    color: var(--background);
 }
 
 .invisible-button-left {
@@ -80,19 +88,24 @@ html {
     border-radius: 3vmin;
     min-height: 10vh;
     width: 95vw;
-    background-color: var(--primary-section);
+    background-color: var(--secondary);
 }
 
 .woundState-container.lightly {
-    background-color: #c7c55e;
+    background-color: var(--primary);
 }
 
 .woundState-container.seriously {
-    background-color: #dc8643;
+    background-color: var(--accent);
 }
 
 .woundState-container.mortally {
-    background-color: #ef2d1a;
+    background-color: var(--background);
+    color: var(--text);
+}
+
+.woundState-container.mortally h1, .woundState-container.mortally h3, .woundState-container.mortally p {
+    color: var(--text);
 }
 
 h1 {
@@ -100,6 +113,7 @@ h1 {
     font-size: 3vh;
     font-weight: bold;
     margin: 0;
+    color: var(--background);
 }
 
 
@@ -109,6 +123,7 @@ h3 {
     font-size: 2vh;
     margin: 0;
     font-weight: normal;
+    color: var(--background);
 }
 
 p {
@@ -117,13 +132,14 @@ p {
     margin: 0;
     font-weight: normal;
     font-style: italic;
+    color: var(--background);
 }
 
 .weaponcarousel {
     position: relative;
     height: 25vh;
     width: 95vw;
-    background-color: var(--secondary-section);
+    background-color: var(--secondary);
     border-radius: 3vmin;
 }
 
@@ -131,7 +147,7 @@ p {
 {
     position: relative;
     height: 50%;
-    background-color: var(--primary-section);
+    background-color: var(--primary);
     border-radius: inherit;
 }
 
@@ -159,7 +175,7 @@ p {
     width: 14vh;
     height: 15vh;
     border-radius: 3vmin;
-    background-color: var(--primary-section);
+    background-color: var(--primary);
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -168,7 +184,7 @@ p {
 }
 
 .stat hr {
-    border: 0.3vh solid var(--background-color);
+    border: 0.3vh solid var(--background);
     margin:0;
     width: 100%;
 }
@@ -185,7 +201,7 @@ p {
     width: 46.25vw;
     height: 15vh;
     border-radius: 3vmin;
-    background-color: var(--primary-section);
+    background-color: var(--primary);
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -194,22 +210,29 @@ p {
 }
 
 .armor hr {
-    border: 0.3vh solid var(--background-color);
+    border: 0.3vh solid var(--background);
     margin:0;
     width: 100%;
+}
+
+.armor div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 80%;
 }
 
 /* app/page css */
 .App {
     Width: 100%;
-    background-color: var(--background-color);
+    background-color: var(--background);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     font-size: calc(10px + 2vmin);
-    color: var(--text-color);
+    color: var(--text);
     text-align: center;
 }
 
@@ -254,7 +277,7 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     line-height: 1.4;
-    background: var(--primary-section);
+    background: var(--primary);
     padding: 14px 28px;
     border-radius: 2vmin;
 }
@@ -267,11 +290,11 @@ body {
     line-height: 78px;
     font-size: 20px;
     font-family: 'Bebas Neue', sans-serif;
-    background: linear-gradient(45deg, transparent 5%, #FF013C 5%);
+    background: linear-gradient(45deg, transparent 5%, var(--primary) 5%);
     border: 0;
-    color: #fff;
+    color: var(--background);
     letter-spacing: 3px;
-    box-shadow: 6px 0px 0px #00E6F6;
+    box-shadow: 6px 0px 0px var(--secondary);
     outline: transparent;
     position: relative;
     user-select: none;
@@ -294,8 +317,8 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(45deg, transparent 3%, #00E6F6 3%, #00E6F6 5%, #FF013C 5%);
-    text-shadow: -3px -3px 0px #F8F005, 3px 3px 0px #00E6F6;
+    background: linear-gradient(45deg, transparent 3%, var(--secondary) 3%, var(--secondary) 5%, var(--primary) 5%);
+    text-shadow: -3px -3px 0px var(--accent), 3px 3px 0px var(--secondary);
     clip-path: var(--slice-0);
 }
 

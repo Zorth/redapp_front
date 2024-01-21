@@ -70,9 +70,9 @@ export function Char() {
 
     function header() {
         return <div className="Header">
-            <div style={{marginLeft: "5vw", marginRight: "5vw"}}>&lt;</div>
+            <h1 style={{marginLeft: "5vw", marginRight: "5vw"}}>&lt;</h1>
             <h1 style={{fontSize: "5vh"}}>COMBAT</h1>
-            <div style={{marginLeft: "5vw", marginRight: "5vw"}}>&gt;</div>
+            <h1 style={{marginLeft: "5vw", marginRight: "5vw"}}>&gt;</h1>
         </div>
     }
 
@@ -203,9 +203,20 @@ export function Char() {
 
 
     const toggleAmmoModal = () => {
-        const findAmmo = character.ammo.find(a => a.name === character.weapons[weaponIndex].ammo);
+        const ammoList = character.ammo;
+        const findAmmo = ammoList.find(a => a.name === character.weapons[weaponIndex].ammo);
         setSelectedAmmo(findAmmo)
         setAmmoScroller(findAmmo.count)
+
+        if (ammoModalEnable)
+        {
+            findAmmo.count = ammoScroller;
+            setCharacter({
+                ...character,
+                ammo: ammoList
+            })
+            setUnpostedChanges(true);
+        }
 
         setAmmoModalEnable(!ammoModalEnable);
     }
@@ -321,15 +332,61 @@ export function Char() {
         </div>
     }
 
+    const bodyArmorDown = () => {
+        if (character.bodyArmor.SP > 0) {
+            let bodyArmorVal = character.bodyArmor
+            bodyArmorVal.SP -= 1;
+            setCharacter({
+                ...character, bodyArmor: bodyArmorVal
+            })
+
+            setUnpostedChanges(true);
+        }
+    }
+
+    const bodyArmorRepair = () => {
+        let bodyArmorVal = character.bodyArmor
+        bodyArmorVal.SP = bodyArmorVal.baseSP;
+        setCharacter({
+            ...character, bodyArmor: bodyArmorVal
+        })
+
+        setUnpostedChanges(true);
+    }
+
+    const headArmorDown = () => {
+        if (character.headArmor.SP > 0) {
+            let headArmorVal = character.headArmor
+            headArmorVal.SP -= 1;
+            setCharacter({
+                ...character, headArmor: headArmorVal
+            })
+
+            setUnpostedChanges(true);
+        }
+    }
+
+    const headArmorRepair = () => {
+        let headArmorVal = character.headArmor
+        headArmorVal.SP = headArmorVal.baseSP;
+        setCharacter({
+            ...character, headArmor: headArmorVal
+        })
+
+        setUnpostedChanges(true);
+    }
+
     function armorSection() {
+
+
         return <div className="armor-container">
             <div className="armor">
                 <h1>Head</h1>
-                <div>{character.headArmor.SP}</div>
+                <div><h3 onClick={headArmorRepair}>(R)</h3><h1>{character.headArmor.SP}</h1><h1 onClick={headArmorDown}>-</h1></div>
             </div>
             <div className="armor">
                 <h1>Body</h1>
-                <div>{character.bodyArmor.SP}</div>
+                <div><h3 onClick={bodyArmorRepair}>(R)</h3><h1>{character.bodyArmor.SP}</h1><h1 onClick={bodyArmorDown}>-</h1></div>
             </div>
         </div>
     }
