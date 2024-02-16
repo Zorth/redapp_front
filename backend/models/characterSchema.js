@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const charSchema = new mongoose.Schema({
 
-    handle: {type:String, required: [true, "Enter CharacterHub Handle"]},
+    handle: {type:String, required: [true, "Enter Character Handle"]},
     full_name: {type:String},
     stats: {
         INT: Number,
@@ -17,10 +17,14 @@ const charSchema = new mongoose.Schema({
         baseEMP: Number,
         EMP: Number
     },
-    skills: [],
+    skills: [{
+        name: String,
+        lvl: Number
+    }],
     HP: Number,
     wound: Number,
     HUM: Number,
+    injuries: [],
     headArmor: {
         name: String,
         baseSP: Number,
@@ -44,11 +48,15 @@ const charSchema = new mongoose.Schema({
         autofire: Number,
         explosive: Boolean
     }],
-    cyberware: [],
-    ammo: {
+    cyberware: [{
+        name: String,
+        HL: Number,
+        location: String
+    }],
+    ammo: [{
         name: String,
         count: Number
-    },
+    }],
     baseIP: Number,
     IP: Number,
     cash: Number

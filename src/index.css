@@ -21,7 +21,7 @@ html {
 }
 
 .char-base {
-    height: 100vh;
+    height: 88vh;
     width: 100vw;
     display: flex;
     flex-direction: column;
@@ -37,6 +37,7 @@ html {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin: 1vh auto;
 
     background: linear-gradient(45deg, transparent 3%, var(--secondary) 3%, var(--secondary) 5%, var(--primary) 5%);
     text-shadow: -3px -3px 0px var(--accent), 3px 3px 0px var(--secondary);

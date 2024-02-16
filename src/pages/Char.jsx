@@ -1,6 +1,6 @@
 import {useParams} from "react-router-dom";
 import axios from "axios";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import NumberPicker from "react-simple-picker";
 import styles from '../index.css';
 import {useSwipeable} from "react-swipeable";
@@ -23,9 +23,18 @@ export function Char() {
 
     const [ammoModalEnable, setAmmoModalEnable] = useState(false);
 
+    const [currentTab, setCurrentTab] = useState(0);
+    var tabs = ["COMBAT", "SKILLS", "INVENTORY"]
+
     //handle swipes
     const handlers = useSwipeable({
-        onSwiped: (eventData) => console.log("User Swiped!", eventData),
+        onSwiped: (eventData) => {
+            if (eventData.dir === "Left") {
+                upTab();
+            } else if (eventData.dir === "Right") {
+                downTab();
+            }
+        },
     });
 
     // fetch localCharacter every 2 seconds
@@ -71,9 +80,23 @@ export function Char() {
     function header() {
         return <div className="Header">
             <h1 style={{marginLeft: "5vw", marginRight: "5vw"}}>&lt;</h1>
-            <h1 style={{fontSize: "5vh"}}>COMBAT</h1>
+            <h1 style={{fontSize: "5vh"}}>{tabs[currentTab]}</h1>
             <h1 style={{marginLeft: "5vw", marginRight: "5vw"}}>&gt;</h1>
+
+            <div className="invisible-button-left" style={{height: "10vh"}} onClick={downTab}></div>
+            <div className="invisible-button-right" style={{height: "10vh"}} onClick={upTab}></div>
         </div>
+    }
+
+    const upTab = () => {
+        setCurrentTab((currentTab + 1) % tabs.length);
+    }
+    const downTab = () => {
+        if (currentTab === 0) {
+            setCurrentTab(tabs.length - 1)
+        } else {
+            setCurrentTab(currentTab - 1);
+        }
     }
 
     function calcWoundState() {
@@ -168,8 +191,7 @@ export function Char() {
         let weaponlist = character.weapons;
         weaponlist[weaponIndex].loaded -= 1;
         setCharacter({
-            ...character,
-            weapons: weaponlist
+            ...character, weapons: weaponlist
         })
 
         setUnpostedChanges(true);
@@ -189,9 +211,7 @@ export function Char() {
             }
         }
         setCharacter({
-            ...character,
-            weapons: weaponlist,
-            ammo: ammolist
+            ...character, weapons: weaponlist, ammo: ammolist
         })
 
         setUnpostedChanges(true);
@@ -208,12 +228,10 @@ export function Char() {
         setSelectedAmmo(findAmmo)
         setAmmoScroller(findAmmo.count)
 
-        if (ammoModalEnable)
-        {
+        if (ammoModalEnable) {
             findAmmo.count = ammoScroller;
             setCharacter({
-                ...character,
-                ammo: ammoList
+                ...character, ammo: ammoList
             })
             setUnpostedChanges(true);
         }
@@ -221,23 +239,22 @@ export function Char() {
         setAmmoModalEnable(!ammoModalEnable);
     }
 
-    const ammoModal = (
-        <div className="modal">
-            <div className="overlay" onClick={toggleAmmoModal}></div>
-            <div className="modal-content">
-                <h3>{selectedAmmo.name}</h3>
-                <NumberPicker
-                    minCount={0} maxCount={1000} current={ammoScroller} preloadCount={20}
-                    iconAdd={<div>+</div>}
-                    iconMinus={<div>-</div>}
-                    scrollerBackground={0}
-                    style={styles.App}
-                    onChange={number => {
-                        setAmmoScroller(number);
-                    }}
-                />
-            </div>
-        </div>);
+    const ammoModal = (<div className="modal">
+        <div className="overlay" onClick={toggleAmmoModal}></div>
+        <div className="modal-content">
+            <h3>{selectedAmmo.name}</h3>
+            <NumberPicker
+                minCount={0} maxCount={1000} current={ammoScroller} preloadCount={20}
+                iconAdd={<div>+</div>}
+                iconMinus={<div>-</div>}
+                scrollerBackground={0}
+                style={styles.App}
+                onChange={number => {
+                    setAmmoScroller(number);
+                }}
+            />
+        </div>
+    </div>);
 
     function weaponCarousel() {
         let weaponName = "WEAPONERROR";
@@ -280,9 +297,7 @@ export function Char() {
 
             ammoSection = <div className="weaponcarousel-ammo">
                 <h3 style={{
-                    fontWeight: "bold",
-                    margin: "1vmin",
-                    marginBottom: 0
+                    fontWeight: "bold", margin: "1vmin", marginBottom: 0
                 }}>{character.weapons[weaponIndex].ammo} Ammo</h3>
                 <div className="flex-horizontal">
                     <div onClick={shoot}><h1>{magAmmo}</h1><p>tap to shoot</p></div>
@@ -382,23 +397,42 @@ export function Char() {
         return <div className="armor-container">
             <div className="armor">
                 <h1>Head</h1>
-                <div><h3 onClick={headArmorRepair}>(R)</h3><h1>{character.headArmor.SP}</h1><h1 onClick={headArmorDown}>-</h1></div>
+                <div><h3 onClick={headArmorRepair}>(R)</h3><h1>{character.headArmor.SP}</h1><h1
+                    onClick={headArmorDown}>-</h1></div>
             </div>
             <div className="armor">
                 <h1>Body</h1>
-                <div><h3 onClick={bodyArmorRepair}>(R)</h3><h1>{character.bodyArmor.SP}</h1><h1 onClick={bodyArmorDown}>-</h1></div>
+                <div><h3 onClick={bodyArmorRepair}>(R)</h3><h1>{character.bodyArmor.SP}</h1><h1
+                    onClick={bodyArmorDown}>-</h1></div>
             </div>
         </div>
     }
 
+    function skillListView() {
+        return <div style={{overflowY: "scroll"}}></div>
+    }
+
+    function getCurrentTab() {
+        switch (currentTab) {
+            case 1:
+                return <div {...handlers} className="char-base">
+                    {skillListView()}
+                </div>;
+            default:
+                return <div {...handlers} className="char-base">
+                    {hpbar()}
+                    {woundstate()}
+                    {weaponCarousel()}
+                    {statSection()}
+                    {armorSection()}
+                </div>;
+        }
+    }
+
     return (<div>
+        {header()}
         <div {...handlers} className="char-base">
-            {header()}
-            {hpbar()}
-            {woundstate()}
-            {weaponCarousel()}
-            {statSection()}
-            {armorSection()}
+            {getCurrentTab()}
 
         </div>
         {ammoModalEnable ? ammoModal : ""}
