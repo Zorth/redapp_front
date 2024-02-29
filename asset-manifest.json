@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/redapp/static/css/main.f6b41d97.css",
-    "main.js": "/redapp/static/js/main.add1374e.js",
+    "main.js": "/redapp/static/js/main.152c3d4f.js",
     "index.html": "/redapp/index.html",
     "main.f6b41d97.css.map": "/redapp/static/css/main.f6b41d97.css.map",
-    "main.add1374e.js.map": "/redapp/static/js/main.add1374e.js.map"
+    "main.152c3d4f.js.map": "/redapp/static/js/main.152c3d4f.js.map"
   },
   "entrypoints": [
     "static/css/main.f6b41d97.css",
-    "static/js/main.add1374e.js"
+    "static/js/main.152c3d4f.js"
   ]
 }
