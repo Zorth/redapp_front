@@ -428,9 +428,14 @@ export function Char() {
     function skillListView() {
         return <div style={{overflowY: "scroll", display: "block", width: "100vw", minHeight: "90vh"}}>
             <div className={"skill"}><input name="searchTerm" onChange={handleSkillSearchTerm}/></div>
-            {character.skills.awareness.filter(filterText).sort(function(a, b){return b.lvl - a.lvl}).map((s, i) =>
-                <div key={i} className={"skill"}><h1>{s.name}</h1><h2>{s.lvl}</h2></div>)}
-        </div>
+            {console.log(character.skills)}
+            {Object.entries(character.skills).map(([cat, skills]) =>
+                <div className={"skillcategory"}>
+                <h1>{cat}</h1>
+                {skills.filter(filterText).sort(function(a, b){return b.lvl - a.lvl}).map((s, i) =>
+                    <div key={i} className={"skill"}><h1>{s.name}</h1><h2>{s.lvl}</h2></div>
+                )} </div>
+            )} </div>
     }
 
     function getCurrentTab() {

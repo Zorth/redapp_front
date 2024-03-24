@@ -284,7 +284,7 @@ body {
 }
 
 .skill {
-    width: 90vw;
+    width: 100%;
     margin: 1vmin auto;
     height: 5vh;
     display: flex;
@@ -292,10 +292,19 @@ body {
     align-items: center;
     background-color: var(--primary);
     border-radius: 3vmin;
+    font-size: 0.5rem;
 }
 
 .skill h2 {
-    margin: 0 12vw;
+    margin: 0 3vw;
+    font-size: 2rem;
+}
+
+.skillcategory {
+    background-color: var(--secondary);
+    width: 90vw;
+    margin: 0 auto;
+    border-radius: 3vmin;
 }
 
 /* buttton by Steven Lei */
