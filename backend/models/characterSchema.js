@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 
 const charSchema = new mongoose.Schema({
 
-    handle: {type:String, required: [true, "Enter Character Handle"]},
-    full_name: {type:String},
+    handle: {type: String, required: [true, "Enter Character Handle"]},
+    full_name: {type: String},
     stats: {
         INT: Number,
         REF: Number,
@@ -17,10 +17,62 @@ const charSchema = new mongoose.Schema({
         baseEMP: Number,
         EMP: Number
     },
-    skills: [{
-        name: String,
-        lvl: Number
-    }],
+    skills: {
+        awareness: [{
+            name: String,
+            lvl: Number,
+            stat: String,
+            cost: Number
+        }],
+        body: [{
+            name: String,
+            lvl: Number,
+            stat: String,
+            cost: Number
+        }],
+        control: [{
+            name: String,
+            lvl: Number,
+            stat: String,
+            cost: Number
+        }],
+        education: [{
+            name: String,
+            lvl: Number,
+            stat: String,
+            cost: Number
+        }],
+        fighting: [{
+            name: String,
+            lvl: Number,
+            stat: String,
+            cost: Number
+        }],
+        performance: [{
+            name: String,
+            lvl: Number,
+            stat: String,
+            cost: Number
+        }],
+        ranged: [{
+            name: String,
+            lvl: Number,
+            stat: String,
+            cost: Number
+        }],
+        social: [{
+            name: String,
+            lvl: Number,
+            stat: String,
+            cost: Number
+        }],
+        technique: [{
+            name: String,
+            lvl: Number,
+            stat: String,
+            cost: Number
+        }]
+    },
     HP: Number,
     wound: Number,
     HUM: Number,

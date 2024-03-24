@@ -283,6 +283,21 @@ body {
     border-radius: 2vmin;
 }
 
+.skill {
+    width: 90vw;
+    margin: 1vmin auto;
+    height: 5vh;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    background-color: var(--primary);
+    border-radius: 3vmin;
+}
+
+.skill h2 {
+    margin: 0 12vw;
+}
+
 /* buttton by Steven Lei */
 .button-49,
 .button-49:after {

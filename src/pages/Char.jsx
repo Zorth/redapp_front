@@ -11,7 +11,7 @@ export function Char() {
     const [character, setCharacter] = useState({
         handle: "handle", full_name: "fullname", stats: {
             INT: 0, REF: 0, DEX: 0, TECH: 0, COOL: 0, WILL: 0, LUCK: 0, MOVE: 0, BODY: 0, baseEMP: 0, EMP: 0
-        }, skills: [], HP: 0, wound: 0, HUM: 0, headArmor: {
+        }, skills: {awareness: [], body: [], control: [], education: [], fighting: [], performance: [], ranged: [], social: [], technique: []}, HP: 0, wound: 0, HUM: 0, headArmor: {
             Name: "", baseSP: 0, SP: 0
         }, bodyArmor: {
             Name: "", baseSP: 0, SP: 0
@@ -269,7 +269,7 @@ export function Char() {
             weaponName = "Brawling";
 
             bonus += character.stats.DEX;
-            let brawlingskill = character.skills.find(s => s.name === "Brawling");
+            let brawlingskill = character.skills.fighting.find(s => s.name === "Brawling");
             bonus += brawlingskill ? brawlingskill.lvl : 0;
 
             if (character.stats.BODY >= 11) damage = "4d6"; else if (character.stats.BODY >= 7) damage = "3d6"; else if (character.stats.BODY >= 5 || character.cyberware.find(c => c.name === "Cyberarm")) damage = "2d6"; else damage = "1d6";
@@ -282,7 +282,7 @@ export function Char() {
         } else {
             weaponName = character.weapons[weaponIndex].name;
 
-            let weaponskill = character.skills.find(s => s.name === character.weapons[weaponIndex].skill);
+            let weaponskill = character.skills.ranged.find(s => s.name === character.weapons[weaponIndex].skill);
             bonus += weaponskill ? weaponskill.lvl : 0;
             bonus += character.stats.REF;
 
@@ -328,7 +328,7 @@ export function Char() {
     }
 
     function statSection() {
-        const evasion = character.skills.find(s => s.name === "Evasion");
+        const evasion = character.skills.fighting.find(s => s.name === "Evasion");
         const evasionBonus = evasion ? evasion.lvl : 0;
 
         return <div className="flex-horizontal" style={{width: "95vw", height: "15vh"}}>
@@ -408,8 +408,29 @@ export function Char() {
         </div>
     }
 
+
+    const [searchTerm, setSearchTerm] = useState("");
+
+    function filterText(skill)
+    {
+        if (searchTerm.length === 0)
+        {
+            return true;
+        }
+        else return skill.name.includes(searchTerm);
+    }
+
+
+    function handleSkillSearchTerm(event) {
+       setSearchTerm(event.target.value);
+    }
+
     function skillListView() {
-        return <div style={{overflowY: "scroll"}}></div>
+        return <div style={{overflowY: "scroll", display: "block", width: "100vw", minHeight: "90vh"}}>
+            <div className={"skill"}><input name="searchTerm" onChange={handleSkillSearchTerm}/></div>
+            {character.skills.awareness.filter(filterText).sort(function(a, b){return b.lvl - a.lvl}).map((s, i) =>
+                <div key={i} className={"skill"}><h1>{s.name}</h1><h2>{s.lvl}</h2></div>)}
+        </div>
     }
 
     function getCurrentTab() {
