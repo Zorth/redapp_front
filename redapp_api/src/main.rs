@@ -20,14 +20,14 @@ async fn main() -> mongodb::error::Result<()> {
     let client = Client::with_uri_str(uri).await?;
 
     // Get a handle on the movies collection
-    let database = client.database("sample_mflix");
-    let my_coll: Collection<Document> = database.collection("movies");
+    let database = client.database("redapp");
+    let my_coll: Collection<Document> = database.collection("starchild");
 
     // Find a movie based on the title value
-    let my_movie = my_coll.find_one(doc! { "title": "The Perils of Pauline" }, None).await?;
+    let my_movie = my_coll.find_one(doc! { "handle": "N0rt0n" }, None).await?;
 
     // Print the document
-    println!("Found a movie:\n{:#?}", my_movie);
+    println!("Found N0rt0n:\n{:#?}", my_movie);
     Ok(())
 }
 
