@@ -1,0 +1,5 @@
+[serve]
+port = 80
+
+[[proxy]]
+backend = "http://localhost:9000/"
