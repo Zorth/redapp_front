@@ -27,7 +27,7 @@ async fn starchild_all() -> Result<()> {
 
     // test user
     hc.do_get("/starchild/all").await?.print().await?;
-
+    
     Ok(())
 }
 

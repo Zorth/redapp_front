@@ -1,5 +1,7 @@
-mod app;
-mod cookies;
+pub mod app;
+pub mod cookies;
+pub mod components;
+pub mod router;
 
 use app::App;
 

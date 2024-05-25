@@ -6,9 +6,7 @@ use futures::TryStreamExt;
 use mongo_db::get_starchild;
 use serde::{Deserialize, Serialize};
 use mongodb::{ 
-    bson::{Document, doc},
-    Client,
-    Collection 
+    bson::{doc, Document}, options::FindOptions, Client, Collection 
 };
 
 pub mod mongo_db;
@@ -66,6 +64,14 @@ async fn handler_user(params: Query<HelloParams>) -> impl IntoResponse {
 }
 
 async fn starchild_all() -> impl IntoResponse {
-   return format!("{}", get_starchild().await.find(doc!{}, None).await.unwrap().try_concat().await.unwrap());
+    let opts = FindOptions::builder()
+        .build();
+    let cursor = get_starchild().await.find(None, None).await.unwrap();
+    let results: Vec<Document>  = cursor.try_collect().await.unwrap();
+    let mut total: Vec<String> = Vec::new();
+    for doc in results {
+        total.push(doc.to_string());
+    }
+    return format!("[{}]", total.join(","));
 }
 
