@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize)]
+#[derive(Clone, PartialEq, Serialize, Deserialize)]
 pub struct Char {
     pub handle: String,
     pub full_name: String,
@@ -15,7 +15,7 @@ pub struct Char {
     pub injuries: Vec<Injury>,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Clone, PartialEq, Serialize, Deserialize)]
 pub struct Stats {
     int: u8,
     r#ref: u8,
@@ -30,7 +30,7 @@ pub struct Stats {
     emp: u8,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Clone, PartialEq, Serialize, Deserialize)]
 pub enum Item {
     Weapon(ItemWeapon),
     Ammo(ItemAmmo),
@@ -40,45 +40,45 @@ pub enum Item {
     Other(ItemOther),
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Clone, PartialEq, Serialize, Deserialize)]
 pub struct ItemAmmo {
     name: String,
     desc: String,
 }
-#[derive(Serialize, Deserialize)]
+#[derive(Clone, PartialEq, Serialize, Deserialize)]
 pub struct ItemWeapon {
     name: String,
     desc: String,
 }
-#[derive(Serialize, Deserialize)]
+#[derive(Clone, PartialEq, Serialize, Deserialize)]
 pub struct ItemCyberware {
     name: String,
     desc: String,
 }
-#[derive(Serialize, Deserialize)]
+#[derive(Clone, PartialEq, Serialize, Deserialize)]
 pub struct ItemHeadArmor {
     name: String,
     desc: String,
 }
-#[derive(Serialize, Deserialize)]
+#[derive(Clone, PartialEq, Serialize, Deserialize)]
 pub struct ItemBodyArmor {
     name: String,
     desc: String,
 }
-#[derive(Serialize, Deserialize)]
+#[derive(Clone, PartialEq, Serialize, Deserialize)]
 pub struct ItemOther {
     name: String,
     desc: String,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Clone, PartialEq, Serialize, Deserialize)]
 pub struct Skill {
     name: String,
     lvl: u8,
     cost: u8,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Clone, PartialEq, Serialize, Deserialize)]
 pub struct Injury {
     name: String,
     quick_fix: String,

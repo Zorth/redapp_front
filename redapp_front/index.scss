@@ -5,5 +5,20 @@ body {
   font-family: sans-serif;
   text-align: center;
   margin: 0;
+  display: flex;
+}
+
+.admin-CharList {
+    width: 30vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.admin-InitTracker {
+    width: 70vw;
+    height: 100vh;
 }
 
