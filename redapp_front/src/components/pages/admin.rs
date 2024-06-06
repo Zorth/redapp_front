@@ -1,12 +1,10 @@
 use yew::prelude::*;
 
-use crate::components::char::Char;
+use crate::components::{char::Char, reqwest::all_chars};
 
 #[function_component(Admin)]
 pub fn admin() -> Html {
-    let mut temp_char = Char::empty();
-    temp_char.handle = "TEST".to_string();
-    let chars = vec![Char::empty(), temp_char];
+    let chars: Vec<Char> = all_chars().await;
     let selected_char = use_state(|| None);
     let on_character_select = {
         let selected_char = selected_char.clone();
